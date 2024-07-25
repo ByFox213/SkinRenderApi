@@ -1,0 +1,15 @@
+[Unit]
+Description=SkinRenderNodeJS
+After=syslog.target network.target
+
+[Service]
+User=root
+Type=simple
+WorkingDirectory=/skins/render_api
+ExecStart=node --env-file=/skins/render_api/.env /skins/render_api/SkinRender.js
+ExecStop=/bin/kill -15 $MAINPID
+RestartSec=10
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
