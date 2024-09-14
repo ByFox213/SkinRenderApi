@@ -9,7 +9,7 @@
 
     const SKIN_PATH = process.env.SKIN_PATH || path.join(__dirname, "skins");
     const OUTPUT_PATH = process.env.OUTPUT_PATH || path.join(__dirname, "render");
-    const BASEURL = `https://${process.env.BASEURL || 'royal-tee.ru'}/api/skins/render/`;
+    const BASEURL = `https://${process.env.BASEURL || '127.0.0.1'}/api/skins/render/`;
 
 
     class SkinManager {
@@ -46,7 +46,7 @@
                 return { err: "skin not found" };
             }
 
-            const outSkinName = `${skinName}_${body}.png`;
+            const outSkinName = `${skinName.replace(" ", "%20")}_${body}.png`;
             const outSkinPath = path.join(OUTPUT_PATH, outSkinName);
 
             if (fs.existsSync(outSkinPath)) {
