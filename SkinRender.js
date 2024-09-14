@@ -46,17 +46,17 @@
                 return { err: "skin not found" };
             }
 
-            const outSkinName = `${skinName.replace(" ", "%20")}_${body}.png`;
+            const outSkinName = `${skinName}_${body}.png`;
             const outSkinPath = path.join(OUTPUT_PATH, outSkinName);
 
             if (fs.existsSync(outSkinPath)) {
-                return { url: `${BASEURL}${outSkinName}` };
+                return { url: `${BASEURL}${outSkinName.replace(" ", "%20")}` };
             }
 
             const skin = await SkinManager.loadSkin(skinPath);
             await SkinManager.saveGameskinPart(skin, body, outSkinPath);
             reply.type("application/json").code(200);
-            return { url: `${BASEURL}${outSkinName}` };
+            return { url: `${BASEURL}${outSkinName.replace(" ", "%20")}` };
         } catch (error) {
             console.error("Error:", error);
         }
